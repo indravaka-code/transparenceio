@@ -142,14 +142,28 @@
   /* ---------- Hero / aperture signature ---------- */
   .hero{
     position:relative;overflow:hidden;
-    background:linear-gradient(160deg,var(--navy-600) 0%,var(--navy-800) 55%,var(--navy-900) 100%);
-    color:#fff;padding:96px 0 110px;
+    background:
+      radial-gradient(115% 85% at 10% -10%, rgba(139,176,224,0.30) 0%, rgba(139,176,224,0) 55%),
+      linear-gradient(160deg,var(--navy-600) 0%,var(--navy-800) 52%,var(--navy-900) 100%);
+    color:#fff;
+    display:flex;align-items:center;
+    min-height:clamp(500px,72vh,760px);
+    padding:80px 0 88px;
+  }
+  /* soft depth pooling toward the lower-right, behind the rings */
+  .hero::after{
+    content:"";position:absolute;right:-6%;bottom:-32%;
+    width:min(820px,78vw);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0) 66%);
+    pointer-events:none;z-index:1;
   }
   .aperture{
-    position:absolute;right:-120px;top:50%;transform:translateY(-50%);
-    width:640px;height:640px;pointer-events:none;opacity:0.5;
+    position:absolute;right:-9%;top:50%;transform:translateY(-50%);
+    width:min(780px,62vw);height:min(780px,62vw);
+    pointer-events:none;opacity:0.55;z-index:1;
   }
-  .aperture circle{fill:none;stroke:rgba(255,255,255,0.14);}
+  @media(max-width:820px){.aperture{opacity:0.3;right:-28%;}}
+  .aperture circle{fill:none;stroke:rgba(255,255,255,0.12);}
   .aperture .spin{animation:spin 60s linear infinite;transform-origin:320px 320px;}
   .aperture .spin-rev{animation:spin 90s linear infinite reverse;transform-origin:320px 320px;}
   @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
@@ -164,11 +178,12 @@
     background:rgba(255,255,255,0.06);
     margin-bottom:28px;
   }
-  .hero-inner{position:relative;z-index:2;max-width:760px;}
-  .hero h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05;font-weight:700;color:#fff;}
-  .hero p.deck{margin-top:16px;font-size:clamp(19px,2.2vw,25px);line-height:1.35;font-weight:500;color:rgba(255,255,255,0.92);max-width:640px;}
-  .hero p.lead{margin-top:22px;font-size:18px;line-height:1.6;color:rgba(255,255,255,0.82);max-width:620px;}
-  .hero-ctas{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+  .hero-inner{position:relative;z-index:2;max-width:760px;width:100%;}
+  .hero h1{font-size:clamp(40px,6.1vw,70px);line-height:1.02;font-weight:700;letter-spacing:-0.032em;color:#fff;}
+  .hero p.deck{margin-top:20px;font-size:clamp(18px,1.85vw,22px);line-height:1.45;font-weight:400;color:rgba(255,255,255,0.76);max-width:47ch;}
+  .hero-ctas{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap;}
+  .hero .hero-ctas .btn{padding:13px 26px;font-size:15px;}
+  .hero .hero-ctas .btn-light:hover{box-shadow:0 10px 28px rgba(0,0,0,0.22);}
 
   /* ---------- Section header ---------- */
   .section{padding:96px 0;}
@@ -354,7 +369,6 @@
     <div class="wrap hero-inner">
       <h1>Securities Lending Reimagined</h1>
       <p class="deck">Run your securities lending business on a modern platform.</p>
-      <p class="lead">Transparence pairs an end-to-end securities lending technology platform with fully actionable front- and back-office services, giving broker/dealers a faster path to revenue without the cost of building additional infrastructure or hiring additional headcount.</p>
       <div class="hero-ctas">
         <a href="#" class="btn btn-light">Schedule a Demo</a>
         <a href="#" class="btn btn-outline-light" data-page="platform">Explore the Platform</a>
